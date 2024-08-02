@@ -3,7 +3,7 @@ use std::io::Write;
 
 use dace_tests::polybench_simplify;
 use dace_toolbox::hist::Hist;
-use static_ri::tracing_ri_with_trace;
+use ri::tracing_ri_with_trace;
 
 pub fn trace_polybench(
     bench: &str,
