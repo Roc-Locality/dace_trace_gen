@@ -1,5 +1,5 @@
 [package]
-name = "clam_trace_gen"
+name = "dace_trace_gen"
 version = "0.1.0"
 edition = "2021"
 
