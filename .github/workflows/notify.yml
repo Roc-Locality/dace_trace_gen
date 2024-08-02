@@ -2,8 +2,9 @@ name: Notify Monorepo
 
 on:
   push:
-    branches:
-      - main  # Trigger the workflow on push to the main branch
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   dispatch-monorepo:
@@ -12,6 +13,18 @@ jobs:
     steps:
       - name: Checkout Submodule Repository
         uses: actions/checkout@v4
+
+      - name: Run rustfmt
+        run: cargo fmt --all -- --check
+
+      - name: Run clippy
+        run: cargo clippy --all
+
+      - name: Build Release
+        run: cargo build --verbose
+
+      - name: Run debug tests
+        run: cargo test --verbose
 
       - name: Get Last Commit Message
         id: get_message
