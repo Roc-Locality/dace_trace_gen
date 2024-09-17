@@ -5,10 +5,29 @@ use dace_tests::polybench_simplify;
 use dace_toolbox::hist::Hist;
 use ri::tracing_ri_with_trace;
 
+/// Traces a Polybench benchmark and generates a histogram of memory accesses.
+///
+/// # Arguments
+///
+/// * `bench` - The name of the benchmark to trace.
+/// * `data_size` - The size of the data for the benchmark.
+/// * `cache_line_size` - The size of the cache line.
+/// * `additional_params` - A slice of additional parameters required by some benchmarks.
+///
+/// # Panics
+///
+/// This function will panic if the required number of additional parameters is not provided.
+///
+/// # Examples
+///
+/// ```
+/// trace_polybench("lu", 32, 8, &[]);
+/// trace_polybench("syrk", 32, 8, &[16]);
+/// ```
 pub fn trace_polybench(
     bench: &str,
-    data_size: usize,
     cache_line_size: usize,
+    data_size: usize,
     additional_params: &[usize],
 ) {
     fn check_params(required: usize, params: &[usize]) {
