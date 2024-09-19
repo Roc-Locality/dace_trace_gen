@@ -1,19 +1,18 @@
 #![feature(get_mut_unchecked)]
 
 use dace::construct;
+use dace_trace_gen::trace_polybench;
 use ri::tracing_ri_with_trace;
-
-mod trace;
 
 fn main() {
     // Choose the target based on some configuration or input
-    let target_type = "symm"; // This can be changed to "lu", "symm", or "gemver"
+    let target_type = "gemm"; // This can be changed to "lu", "symm", or "gemver"
 
     match target_type {
-        "lu" => trace::trace_polybench("lu", 8, 32, &[]),
-        "symm" => trace::trace_polybench("symm", 8, 32, &[32]),
-        // "gemver" => trace::trace_polybench("gemver", 8, 1024, &[]),
-        "gram" => trace::trace_polybench("gramschmidt_trace", 8, 32, &[32]),
+        "lu" => trace_polybench("lu", 4, 64, &[32]), // 1.4mb
+        "symm" => trace_polybench("symm", 4, 64, &[32, 32]), //1.6 mb
+        "gemm" => trace_polybench("gemm", 4, 64, &[32]), // 4.4
+        "gram" => trace_polybench("gramschmidt_trace", 4, 64, &[32, 32]),
         "mm" => perform_matrix_operations(32),
         _ => panic!("Unknown target type"),
     };
