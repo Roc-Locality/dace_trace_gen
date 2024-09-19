@@ -21,8 +21,8 @@ use std::io::Write;
 ///
 /// ```
 /// use dace_trace_gen::trace_polybench;
-/// trace_polybench("lu", 32, 8, &[]);
-/// trace_polybench("syrk", 32, 8, &[16]);
+/// trace_polybench("lu", 32, 8, &[8]);
+/// trace_polybench("syrk", 32, 8, &[16, 16]);
 /// ```
 pub fn trace_polybench(
     bench: &str,
